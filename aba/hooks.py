@@ -150,6 +150,17 @@ app_license = "mit"
 # 		"aba.tasks.monthly"
 # 	],
 # }
+scheduler_events = {
+    #  "cron":{
+    #     "* * * * *":[
+    #         "aba.biometric_attendance.action.addDailyCheckInToDoc"
+    #     ]
+    # },
+    "daily": [
+		"aba.biometric_attendance.action.addDailyCheckInToDoc"
+	],
+	
+}
 
 # Testing
 # -------

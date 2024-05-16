@@ -152,7 +152,7 @@ app_license = "mit"
 # }
 scheduler_events = {
     #  "cron":{
-    #     "* * * * *":[
+    #     "* 10 * * *":[
     #         "aba.biometric_attendance.action.addDailyCheckInToDoc"
     #     ]
     # },
@@ -238,3 +238,6 @@ scheduler_events = {
 # 	"Logging DocType Name": 30  # days to retain logs
 # }
 
+fixtures = [
+    "Custom Field"
+]

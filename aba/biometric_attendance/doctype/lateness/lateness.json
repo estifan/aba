@@ -9,23 +9,25 @@
   "employee_id",
   "employee_name",
   "column_break_cpeg",
-  "check_in_time",
   "date",
-  "status"
+  "check_in_time",
+  "late_time"
  ],
  "fields": [
   {
    "fieldname": "employee_id",
    "fieldtype": "Link",
    "label": "Employee Id",
-   "options": "Employee"
+   "options": "Employee",
+   "read_only": 1
   },
   {
    "fieldname": "employee_name",
    "fieldtype": "Data",
    "in_list_view": 1,
    "in_standard_filter": 1,
-   "label": "Employee Name"
+   "label": "Employee Name",
+   "read_only": 1
   },
   {
    "fieldname": "column_break_cpeg",
@@ -36,15 +38,8 @@
    "fieldtype": "Date",
    "in_list_view": 1,
    "in_standard_filter": 1,
-   "label": "Date"
-  },
-  {
-   "fieldname": "status",
-   "fieldtype": "Select",
-   "in_list_view": 1,
-   "in_standard_filter": 1,
-   "label": "Status",
-   "options": "Unknown\nNormal\nLate"
+   "label": "Date",
+   "read_only": 1
   },
   {
    "fieldname": "check_in_time",
@@ -55,14 +50,20 @@
    "fieldname": "check_in_section",
    "fieldtype": "Section Break",
    "label": "Check In"
+  },
+  {
+   "fieldname": "late_time",
+   "fieldtype": "Float",
+   "label": "Late Time",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-05-15 15:43:19.485066",
+ "modified": "2024-05-16 14:32:01.878655",
  "modified_by": "Administrator",
  "module": "biometric attendance",
- "name": "Check In",
+ "name": "Lateness",
  "naming_rule": "Autoincrement",
  "owner": "Administrator",
  "permissions": [

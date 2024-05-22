@@ -17,4 +17,5 @@ def device_status(userName,password,ip):
     if response.status_code == 200:
         return "Online"
     else:
+        print(response.text)
         return "Offline"

@@ -54,9 +54,12 @@ def addDailyLatenessToDoc():
                 # add(args, ignore_permissions=True)
                 try:
                     frappe.share.add("Lateness",data.name,employee["user_id"],1,1,0,0,0,1)
-                    frappe.share.add("Lateness",data.name,manager["user_id"],1,1,0,0,0,1)
                 except:
-                    print("share error")
+                    print("share error for employee")
+                try:
+                    frappe.share.add("Lateness",data.name,manager["user_id"],1,0,0,0,0,1)
+                except:
+                    print("share error for manager")
                 
         except frappe.DoesNotExistError:
             print("Doctype already exists false:", "Lateness")

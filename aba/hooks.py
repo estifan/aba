@@ -4,6 +4,7 @@ app_publisher = "TTSP"
 app_description = "Integrating ERPNext with a Biometric Attendance Machine"
 app_email = "estifanos.wondimu@ttspplc.com"
 app_license = "mit"
+required_apps = ["frappe/erpnext/hrms"]
 # required_apps = []
 
 # Includes in <head>
@@ -151,14 +152,14 @@ app_license = "mit"
 # 	],
 # }
 scheduler_events = {
-    #  "cron":{
-    #     "* 10 * * *":[
-    #         "aba.biometric_attendance.action.addDailyCheckInToDoc"
-    #     ]
-    # },
-    "daily": [
-		"aba.biometric_attendance.action.addDailyCheckInToDoc"
-	],
+     "cron":{
+        "5 10 * * *":[
+            "aba.biometric_attendance.action.addDailyLatenessToDoc"
+        ]
+    },
+    # "daily": [
+	# 	"aba.biometric_attendance.action.addDailyLatenessToDoc"
+	# ],
 	
 }
 

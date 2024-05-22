@@ -66,7 +66,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-03-08 00:55:07.386983",
+ "modified": "2024-05-21 15:22:45.455649",
  "modified_by": "Administrator",
  "module": "biometric attendance",
  "name": "Device",
@@ -81,7 +81,7 @@
    "print": 1,
    "read": 1,
    "report": 1,
-   "role": "System Manager",
+   "role": "HR Manager",
    "share": 1,
    "write": 1
   }

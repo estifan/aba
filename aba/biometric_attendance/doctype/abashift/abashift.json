@@ -137,7 +137,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-03-09 03:34:58.170130",
+ "modified": "2024-05-21 15:23:06.012846",
  "modified_by": "Administrator",
  "module": "biometric attendance",
  "name": "ABAshift",
@@ -152,7 +152,7 @@
    "print": 1,
    "read": 1,
    "report": 1,
-   "role": "System Manager",
+   "role": "HR Manager",
    "share": 1,
    "write": 1
   }

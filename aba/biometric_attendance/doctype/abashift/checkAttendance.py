@@ -1,3 +1,5 @@
+from time import sleep
+from aba.biometric_attendance.device import hikvisionGetcheckIn
 import frappe
 import requests
 from requests.auth import HTTPDigestAuth
@@ -69,7 +71,11 @@ def calculate_absent_time(device_doc, employee, start_date, end_date, start_time
         )
 
         if attendance_response.status_code != 200:
-            return False
+            print("error")
+            sleep(10)
+            print("sleep done")
+            attendance(Hikivision_Username, Hikivision_Password, Hikivision_IP, employeeNo, day)
+            # return False
         
         attendance_data = attendance_response.json()
         checkIn_Time = attendance_data["AcsEvent"]
@@ -161,7 +167,7 @@ def calculate_absent_time(device_doc, employee, start_date, end_date, start_time
                                     print("share error for employee")
                                 try:
                                     manager = frappe.get_all('Employee', filters={'status': 'Active','name':  employee["reports_to"]}, fields=["user_id"])[0]
-                                    frappe.share.add("Lateness",data.name,manager["user_id"],1,0,0,0,0,1)
+                                    frappe.share.add("Lateness",data.name,manager["user_id"],1,1,0,0,0,1)
                                 except:
                                     print("share error for manager")
                             except Exception as error:
@@ -170,7 +176,7 @@ def calculate_absent_time(device_doc, employee, start_date, end_date, start_time
                         # elif(latenessRecord["workflow_state"]=="Pending"):
 
                         else:
-                            print("alredy exists")
+                            print("already exists")
                 else:
                     pass
             else:

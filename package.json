@@ -1,0 +1,15 @@
+{
+  "dependencies": {
+    "web-push": "^3.6.7"
+  },
+  "name": "aba",
+  "description": "Integrating ERPNext with a Biometric Attendance Machine",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

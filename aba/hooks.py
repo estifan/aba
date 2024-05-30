@@ -11,8 +11,8 @@ required_apps = ["frappe/erpnext/hrms"]
 # ------------------
 
 # include js, css files in header of desk.html
-# app_include_css = "/assets/aba/css/aba.css"
-# app_include_js = "/assets/aba/js/aba.js"
+app_include_css = "/assets/aba/manifest.json"
+app_include_js = "/assets/aba/reg.js"
 
 # include js, css files in header of web template
 # web_include_css = "/assets/aba/css/aba.css"

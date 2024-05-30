@@ -1,0 +1,41 @@
+{
+ "based_on": "date",
+ "chart_name": "Lateness chart",
+ "chart_type": "Sum",
+ "creation": "2024-05-30 10:55:46.282566",
+ "docstatus": 0,
+ "doctype": "Dashboard Chart",
+ "document_type": "Lateness",
+ "dynamic_filters_json": "[]",
+ "filters_json": "[]",
+ "group_by_type": "Count",
+ "idx": 0,
+ "is_public": 0,
+ "is_standard": 1,
+ "modified": "2024-05-30 10:55:46.282566",
+ "modified_by": "Administrator",
+ "module": "biometric attendance",
+ "name": "Lateness chart",
+ "number_of_groups": 0,
+ "owner": "Administrator",
+ "parent_document_type": "",
+ "roles": [
+  {
+   "role": "ABA Admin"
+  },
+  {
+   "role": "HR Manager"
+  },
+  {
+   "role": "ABA Manager"
+  }
+ ],
+ "source": "",
+ "time_interval": "Daily",
+ "timeseries": 1,
+ "timespan": "Last Week",
+ "type": "Bar",
+ "use_report_chart": 0,
+ "value_based_on": "late_time",
+ "y_axis": []
+}

@@ -71,5 +71,5 @@ def calculateLateness(start_date = date.today(), end_date = date.today(),abashif
                 start_date += delta
                 weekDay = weekDay + 1
     rounded_count = round(count.total_seconds() / 3600, 1)
-    print("latness: ", rounded_count)
-    return rounded_count
+    print("lateness: ", rounded_count)
+    return rounded_count 

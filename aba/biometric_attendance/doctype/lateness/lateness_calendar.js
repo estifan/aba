@@ -3,9 +3,9 @@ frappe.views.calendar['Lateness'] = {
     field_map: {
         start: 'date',
         end: 'date',
-        id: 'employee_name',
+        id: 'name',
         allDay: 'all_day',
-        title: 'name'
+        title: 'employee_name'
         // status: 'event_type',
         // color: 'color'
     },

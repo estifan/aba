@@ -4,7 +4,7 @@ from requests.auth import HTTPDigestAuth
 import json
 from datetime import datetime, date
 
-def hikvisionGetcheckIn(employeeNo =22 ,day = datetime.strftime(date.today(), '%Y-%m-%d'),device="ABA-Hikvision"):
+def hikvisionGetcheckIn(employeeNo,day = datetime.strftime(date.today(), '%Y-%m-%d'),device="ABA-Hikvision"):
     device_doc = frappe.db.get_value('Device', device, ['ip_address', 'user_name', 'password'])
     print("Geting.. check in")
 
@@ -13,6 +13,7 @@ def hikvisionGetcheckIn(employeeNo =22 ,day = datetime.strftime(date.today(), '%
     Hikivision_IP = device_doc[0]
 
     attendance_url = f"http://{Hikivision_IP}/ISAPI/AccessControl/AcsEvent?format=json"
+    # "timeReverseOrder":
     payload = json.dumps({
         "AcsEventCond": {
             "searchID": f"{employeeNo}",
@@ -38,7 +39,8 @@ def hikvisionGetcheckIn(employeeNo =22 ,day = datetime.strftime(date.today(), '%
 
     if attendance_response.status_code != 200:
         print("error")
-        return False
+        hikvisionGetcheckIn(employeeNo,day,device)
+        # return False
     
     attendance_data = attendance_response.json()
     data = attendance_data["AcsEvent"]

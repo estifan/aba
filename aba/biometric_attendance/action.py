@@ -16,7 +16,8 @@ def addDailyLatenessToDoc():
     a = frappe.get_all('Lateness')
     print(a)
     for employee in employees:
-        checkIn_Time = hikvisionGetcheckIn(employeeNo= employee['attendance_device_id'])
+        shift = frappe.get_all('ABAshift', filters={'name': employee['shift_type']}, fields=['name','device'])
+        checkIn_Time = hikvisionGetcheckIn(employeeNo= employee['attendance_device_id'],device=shift["device"])
         manager = {}
         if(employee["reports_to"]): 
             manager = frappe.get_all('Employee', filters={'status': 'Active','name':  employee["reports_to"]}, fields=["user_id"])[0]
@@ -57,7 +58,7 @@ def addDailyLatenessToDoc():
                 except:
                     print("share error for employee")
                 try:
-                    frappe.share.add("Lateness",data.name,manager["user_id"],1,0,0,0,0,1)
+                    frappe.share.add("Lateness",data.name,manager["user_id"],1,1,0,0,0,1)
                 except:
                     print("share error for manager")
                 

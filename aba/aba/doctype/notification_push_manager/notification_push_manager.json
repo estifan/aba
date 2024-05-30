@@ -1,0 +1,83 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "field:user",
+ "creation": "2024-05-24 08:22:43.113960",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "information_section",
+  "user",
+  "endpoint",
+  "column_break_wirv",
+  "auth",
+  "p256dh",
+  "test_notification"
+ ],
+ "fields": [
+  {
+   "fieldname": "information_section",
+   "fieldtype": "Section Break",
+   "label": "Information"
+  },
+  {
+   "fieldname": "user",
+   "fieldtype": "Data",
+   "label": "User",
+   "read_only": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "p256dh",
+   "fieldtype": "Data",
+   "label": "P256dh",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_wirv",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "auth",
+   "fieldtype": "Data",
+   "label": "Auth",
+   "read_only": 1
+  },
+  {
+   "fieldname": "endpoint",
+   "fieldtype": "Text",
+   "label": "Endpoint",
+   "read_only": 1
+  },
+  {
+   "fieldname": "test_notification",
+   "fieldtype": "Button",
+   "label": "Test Notification"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2024-05-24 12:21:36.404226",
+ "modified_by": "Administrator",
+ "module": "Aba",
+ "name": "Notification Push Manager",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

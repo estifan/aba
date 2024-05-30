@@ -1,0 +1,12 @@
+{
+    "theme_color": "#8936FF",
+    "background_color": "#2EC6FE",
+    "orientation": "any",
+    "display": "standalone",
+    "dir": "auto",
+    "lang": "en-US",
+    "name": "TTSP",
+    "short_name": "TTSP",
+    "start_url": "http://dev.localhost:8000/login",
+    "scope": "http://dev.localhost:8000/login"
+}

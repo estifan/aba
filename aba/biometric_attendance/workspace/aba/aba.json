@@ -1,0 +1,100 @@
+{
+ "charts": [
+  {
+   "chart_name": "try",
+   "label": "Report"
+  }
+ ],
+ "content": "[{\"id\":\"ATAziNNeh7\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Automated Biometrics Attendance</span>\",\"col\":12}},{\"id\":\"JKz7sN9vyz\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Report\",\"col\":12}},{\"id\":\"m4CQxk4qcD\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"F9rQZLxDMu\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Device\",\"col\":3}},{\"id\":\"W2LnxOrG4b\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Shift\",\"col\":3}},{\"id\":\"Yio3DHF3Al\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"U0Y-tKt88l\",\"type\":\"card\",\"data\":{\"card_name\":\"Lateness Card\",\"col\":4}},{\"id\":\"aML-m2zyPU\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"K6-TyFJS0Y\",\"type\":\"card\",\"data\":{\"card_name\":\"Report\",\"col\":4}}]",
+ "creation": "2024-05-30 14:03:16.124512",
+ "custom_blocks": [],
+ "docstatus": 0,
+ "doctype": "Workspace",
+ "for_user": "",
+ "hide_custom": 0,
+ "icon": "onboarding",
+ "idx": 0,
+ "indicator_color": "",
+ "is_hidden": 0,
+ "label": "ABA",
+ "links": [
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Lateness Card",
+   "link_count": 2,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Lateness",
+   "link_count": 0,
+   "link_to": "Lateness",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Calculate total Lateness",
+   "link_count": 0,
+   "link_to": "Calculate total Lateness",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Report",
+   "link_count": 1,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Lateness Report",
+   "link_count": 0,
+   "link_to": "Lateness Report",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  }
+ ],
+ "modified": "2024-05-31 08:20:51.507472",
+ "modified_by": "Administrator",
+ "module": "biometric attendance",
+ "name": "ABA",
+ "number_cards": [],
+ "owner": "Administrator",
+ "parent_page": "",
+ "public": 1,
+ "quick_lists": [],
+ "roles": [],
+ "sequence_id": 17.0,
+ "shortcuts": [
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Shift",
+   "link_to": "ABAshift",
+   "stats_filter": "[]",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Device",
+   "link_to": "Device",
+   "stats_filter": "[]",
+   "type": "DocType"
+  }
+ ],
+ "title": "ABA"
+}

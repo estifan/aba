@@ -27,7 +27,25 @@ def addDailyLatenessToDoc():
             print("Doctype already exists:", "Lateness")
             lateTime = calculateLateness(abashift_id=employee['shift_type'],chackIn=checkIn_Time)
             if(lateTime):
-                newLateness = frappe.get_doc(
+                try:
+                    newLateness = frappe.get_doc(
+                        {
+                            "doctype": "Lateness",
+                            "employee_id": employee["name"],
+                            "employee_name": employee["employee_name"],
+                            "date": date.today(),
+                            "check_in_time": checkIn_Time,
+                            "late_time": lateTime,
+                            "manager": manager["user_id"],
+                            # "employee_email": employee["user_id"],
+                            # "manager_email": manager["user_id"],
+                            # "owner": managerUser["username"],
+                        }
+                    )
+                    data = newLateness.insert()
+                    frappe.db.commit()
+                except:
+                    newLateness = frappe.get_doc(
                     {
                         "doctype": "Lateness",
                         "employee_id": employee["name"],
@@ -35,13 +53,14 @@ def addDailyLatenessToDoc():
                         "date": date.today(),
                         "check_in_time": checkIn_Time,
                         "late_time": lateTime,
+                        # "manager": manager["user_id"],
                         # "employee_email": employee["user_id"],
                         # "manager_email": manager["user_id"],
                         # "owner": managerUser["username"],
                     }
-                )
-                data = newLateness.insert()
-                frappe.db.commit()
+                    )
+                    data = newLateness.insert()
+                    frappe.db.commit()
                 # #change doc owner
                 # frappe.db.set_value("Lateness", data.name, "owner", managerUser["username"])
                 # print("doc data:", data.name)

@@ -1,0 +1,35 @@
+{
+ "attach_print": 0,
+ "channel": "System Notification",
+ "creation": "2024-05-31 11:15:54.391695",
+ "days_in_advance": 0,
+ "docstatus": 0,
+ "doctype": "Notification",
+ "document_type": "Lateness",
+ "enabled": 1,
+ "event": "Value Change",
+ "idx": 0,
+ "is_standard": 1,
+ "message": "<p>Approval requested for Lateness {{doc.name}}</p>\n",
+ "message_type": "Markdown",
+ "modified": "2024-05-31 16:19:12.329792",
+ "modified_by": "Administrator",
+ "module": "biometric attendance",
+ "name": "Lateness",
+ "owner": "Administrator",
+ "recipients": [
+  {
+   "condition": "doc.workflow_state == 'Waiting For Manager Approval'",
+   "receiver_by_document_field": "manager",
+   "receiver_by_role": ""
+  },
+  {
+   "condition": "doc.workflow_state == 'Waiting For HR Approval'",
+   "receiver_by_role": "HR Manager"
+  }
+ ],
+ "send_system_notification": 0,
+ "send_to_all_assignees": 0,
+ "subject": "Approval requested for Lateness {{doc.name}}",
+ "value_changed": "workflow_state"
+}

@@ -38,7 +38,7 @@ def hikvisionGetcheckIn(employeeNo,day = datetime.strftime(date.today(), '%Y-%m-
     )
 
     if attendance_response.status_code != 200:
-        print("error")
+        print("error: ",attendance_response)
         hikvisionGetcheckIn(employeeNo,day,device)
         # return False
     

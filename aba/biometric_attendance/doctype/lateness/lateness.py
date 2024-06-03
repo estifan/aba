@@ -41,7 +41,8 @@ class Lateness(Document):
 		elif(self.workflow_state == "Rejected"):
 			print("Rejected")
 			employee = frappe.get_all('Employee', filters={"name": self.employee_id }, fields=['shift_type',"user_id","attendance_device_id"])[0]
-			shift = frappe.get_all('ABAshift', filters={'name': employee['shift_type']}, fields=['name','device'])
+			shift = frappe.get_all('ABAshift', filters={'name': employee['shift_type']}, fields=['name','device'])[0]
+			print("shift: ",shift)
 			check_in_time =hikvisionGetcheckIn(employeeNo=employee['attendance_device_id'],day= self.date, device=shift["device"])
 			self.check_in_time = check_in_time
 			# to do

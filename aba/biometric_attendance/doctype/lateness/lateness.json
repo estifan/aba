@@ -8,6 +8,7 @@
   "check_in_section",
   "employee_id",
   "employee_name",
+  "manager",
   "column_break_cpeg",
   "date",
   "check_in_time",
@@ -57,11 +58,18 @@
    "fieldtype": "Float",
    "label": "Late Time",
    "read_only": 1
+  },
+  {
+   "fieldname": "manager",
+   "fieldtype": "Link",
+   "label": "Manager",
+   "options": "User",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-05-30 09:53:21.643770",
+ "modified": "2024-05-31 16:01:36.949237",
  "modified_by": "Administrator",
  "module": "biometric attendance",
  "name": "Lateness",
@@ -95,6 +103,7 @@
    "write": 1
   },
   {
+   "delete": 1,
    "email": 1,
    "export": 1,
    "print": 1,

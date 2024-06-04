@@ -88,15 +88,13 @@
   {
    "fieldname": "time_to_wait",
    "fieldtype": "Time",
-   "label": "Time To Wait",
-   "set_only_once": 1
+   "label": "Time To Wait"
   },
   {
    "default": "0",
    "fieldname": "has_exceptional_day",
    "fieldtype": "Check",
-   "label": "has exceptional day ",
-   "set_only_once": 1
+   "label": "has exceptional day "
   },
   {
    "depends_on": "eval:doc.has_exceptional_day;",
@@ -137,7 +135,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-05-30 09:51:54.813816",
+ "modified": "2024-06-03 15:54:22.533585",
  "modified_by": "Administrator",
  "module": "biometric attendance",
  "name": "ABAshift",

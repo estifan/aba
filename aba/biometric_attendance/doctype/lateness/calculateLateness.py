@@ -61,15 +61,14 @@ def calculateLateness(start_date = date.today(), end_date = date.today(),abashif
                         start_date += delta
                         weekDay = weekDay + 1
                         next
-                    if checkIn_Time <= datetime.strptime("12:00:00", '%H:%M:%S').time():
-                        final = datetime.combine(date.today(), checkIn_Time) - datetime.combine(date.today(), start_time1.time())
-                        count = count + final
-                        print("count: ",count)
-                        print("final: ",final)
+                    final = datetime.combine(date.today(), checkIn_Time) - datetime.combine(date.today(), start_time1.time())
+                    count = count + final
+                    print("count: ",count)
+                    print("final: ",final)
                 else:
                     pass
                 start_date += delta
                 weekDay = weekDay + 1
-    rounded_count = round(count.total_seconds() / 3600, 1)
+    rounded_count = count.total_seconds() / 3600
     print("lateness: ", rounded_count)
     return rounded_count 

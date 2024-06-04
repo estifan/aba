@@ -1,8 +1,24 @@
+from time import sleep
 import frappe
 import requests
 from requests.auth import HTTPDigestAuth
 import json
-from datetime import datetime, date
+from datetime import datetime, date, time
+
+def requestChecker(attendance_url,headers,payload,Hikivision_Username,Hikivision_Password):
+    attendance_response = requests.post(
+            attendance_url,
+            headers=headers,
+            data=payload,
+            auth=HTTPDigestAuth(Hikivision_Username, Hikivision_Password)
+        )
+    if attendance_response.status_code != 200:
+            print("error")
+            sleep(10)
+            print("sleep done")
+            return requestChecker(attendance_url,headers,payload,Hikivision_Username,Hikivision_Password)
+    else:
+        return attendance_response
 
 def hikvisionGetcheckIn(employeeNo,day = datetime.strftime(date.today(), '%Y-%m-%d'),device="ABA-Hikvision"):
     device_doc = frappe.db.get_value('Device', device, ['ip_address', 'user_name', 'password'])
@@ -30,22 +46,14 @@ def hikvisionGetcheckIn(employeeNo,day = datetime.strftime(date.today(), '%Y-%m-
         'Content-Type': 'application/json'
     }
 
-    attendance_response = requests.post(
-        attendance_url,
-        headers=headers,
-        data=payload,
-        auth=HTTPDigestAuth(Hikivision_Username, Hikivision_Password)
-    )
-
-    if attendance_response.status_code != 200:
-        print("error: ",attendance_response)
-        hikvisionGetcheckIn(employeeNo,day,device)
-        # return False
-    
+    attendance_response = requestChecker(attendance_url,headers,payload,Hikivision_Username,Hikivision_Password)    
     attendance_data = attendance_response.json()
     data = attendance_data["AcsEvent"]
     if data['totalMatches'] != 0:
         data = data["InfoList"][0]["time"]
         if data:
             checkIn_Time = datetime.fromisoformat(data).time()
-    return checkIn_Time
+            print("checkIn_Time: ", checkIn_Time)
+            return checkIn_Time
+    else:
+         return time(0,0,0)

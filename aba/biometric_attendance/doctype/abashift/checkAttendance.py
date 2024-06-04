@@ -129,76 +129,75 @@ def calculate_absent_time(device_doc, employee, start_date, end_date, start_time
                         start_date += delta
                         weekDay = weekDay + 1
                         next
-                    if checkIn_Time <= datetime.strptime("12:00:00", '%H:%M:%S').time():
-                        final = datetime.combine(date.today(), checkIn_Time) - datetime.combine(date.today(), start_time1.time())
-                        # count = count + final
-                        # print("count: ",count)
-                        latenessOfTheDay = round(final.total_seconds() / 3600, 1)
-                        latenessRecord = frappe.get_all('Lateness', filters={'name': f'{start_date.date()}-{employee["employee_name"]}'}, fields=['check_in_time', 'late_time','workflow_state'])
-                        print(len(latenessRecord))
-                        if(len(latenessRecord) == 0):
-                            manager = {}
-                            if(employee["reports_to"]): 
-                                manager = frappe.get_all('Employee', filters={'status': 'Active','name':  employee["reports_to"]}, fields=["user_id"])[0]
+                    final = datetime.combine(date.today(), checkIn_Time) - datetime.combine(date.today(), start_time1.time())
+                    # count = count + final
+                    # print("count: ",count)
+                    latenessOfTheDay = final.total_seconds() / 3600
+                    latenessRecord = frappe.get_all('Lateness', filters={'name': f'{start_date.date()}-{employee["employee_name"]}'}, fields=['check_in_time', 'late_time','workflow_state'])
+                    print(len(latenessRecord))
+                    if(len(latenessRecord) == 0):
+                        manager = {}
+                        if(employee["reports_to"]): 
+                            manager = frappe.get_all('Employee', filters={'status': 'Active','name':  employee["reports_to"]}, fields=["user_id"])[0]
+                        try:
                             try:
-                                try:
-                                    newLateness = frappe.get_doc(
-                                        {
-                                            "doctype": "Lateness",
-                                            "employee_id": employee["name"],
-                                            "employee_name": employee["employee_name"],
-                                            "date": start_date.date(),
-                                            "check_in_time": checkIn_Time,
-                                            "late_time": latenessOfTheDay,
-                                            # "employee_email": employee["user_id"],
-                                            "manager": manager["user_id"],
-                                            # "owner": managerUser["username"],
-                                        }
-                                    )
-                                    data = newLateness.insert()
-                                    frappe.db.commit()
-                                except:
-                                    newLateness = frappe.get_doc(
-                                        {
-                                            "doctype": "Lateness",
-                                            "employee_id": employee["name"],
-                                            "employee_name": employee["employee_name"],
-                                            "date": start_date.date(),
-                                            "check_in_time": checkIn_Time,
-                                            "late_time": latenessOfTheDay,
-                                            # "employee_email": employee["user_id"],
-                                            # "manager": manager["user_id"],
-                                            # "owner": managerUser["username"],
-                                        }
-                                    )
-                                    data = newLateness.insert()
-                                    frappe.db.commit()
-                                # #change doc owner
-                                # frappe.db.set_value("Lateness", data.name, "owner", managerUser["username"])
-                                # print("doc data:", data.name)
-                                #assigne user
-                                # args = {
-                                #     "assign_to" : [],
-                                #     "doctype" : "Lateness",
-                                #     "name" : data.name,
-                                #     "description" : "auto assignment",
-                                # }
-                                # add(args, ignore_permissions=True)
-                                try:
-                                    frappe.share.add("Lateness",data.name,employee["user_id"],1,1,0,0,0,1)
-                                except:
-                                    print("share error for employee")
-                                try:
-                                    frappe.share.add("Lateness",data.name,manager["user_id"],1,1,0,0,0,1)
-                                except:
-                                    print("share error for manager")
-                            except Exception as error:
-                                print("error: ",error)
-                            print("final: ",final)
-                        # elif(latenessRecord["workflow_state"]=="Pending"):
+                                newLateness = frappe.get_doc(
+                                    {
+                                        "doctype": "Lateness",
+                                        "employee_id": employee["name"],
+                                        "employee_name": employee["employee_name"],
+                                        "date": start_date.date(),
+                                        "check_in_time": checkIn_Time,
+                                        "late_time": latenessOfTheDay,
+                                        # "employee_email": employee["user_id"],
+                                        "manager": manager["user_id"],
+                                        # "owner": managerUser["username"],
+                                    }
+                                )
+                                data = newLateness.insert()
+                                frappe.db.commit()
+                            except:
+                                newLateness = frappe.get_doc(
+                                    {
+                                        "doctype": "Lateness",
+                                        "employee_id": employee["name"],
+                                        "employee_name": employee["employee_name"],
+                                        "date": start_date.date(),
+                                        "check_in_time": checkIn_Time,
+                                        "late_time": latenessOfTheDay,
+                                        # "employee_email": employee["user_id"],
+                                        # "manager": manager["user_id"],
+                                        # "owner": managerUser["username"],
+                                    }
+                                )
+                                data = newLateness.insert()
+                                frappe.db.commit()
+                            # #change doc owner
+                            # frappe.db.set_value("Lateness", data.name, "owner", managerUser["username"])
+                            # print("doc data:", data.name)
+                            #assigne user
+                            # args = {
+                            #     "assign_to" : [],
+                            #     "doctype" : "Lateness",
+                            #     "name" : data.name,
+                            #     "description" : "auto assignment",
+                            # }
+                            # add(args, ignore_permissions=True)
+                            try:
+                                frappe.share.add("Lateness",data.name,employee["user_id"],1,1,0,0,0,1)
+                            except:
+                                print("share error for employee")
+                            try:
+                                frappe.share.add("Lateness",data.name,manager["user_id"],1,1,0,0,0,1)
+                            except:
+                                print("share error for manager")
+                        except Exception as error:
+                            print("error: ",error)
+                        print("final: ",final)
+                    # elif(latenessRecord["workflow_state"]=="Pending"):
 
-                        else:
-                            print("already exists")
+                    else:
+                        print("already exists")
                 else:
                     pass
             else:

@@ -1,4 +1,4 @@
-from aba.biometric_attendance.doctype.lateness.calculateLateness import calculateLateness
+from aba.biometric_attendance.doctype.lateness.calculateLateness import calculateLateness, exc_date
 import frappe
 import requests
 from requests.auth import HTTPDigestAuth
@@ -18,7 +18,12 @@ def addDailyLatenessToDoc():
         print(employee['attendance_device_id'])
         print("shift_type: ",employee['shift_type'])
         if  employee['shift_type']:
-            shift = frappe.get_all('ABAshift', filters={'name': employee['shift_type']}, fields=['name','device'])[0]
+            shift = frappe.get_doc('ABAshift', employee['shift_type']).as_dict()
+            if len(shift.list_of_days):
+                filtered_arr = [d for d in shift.list_of_days if exc_date(d.day_of_the_week)-1 == date.today().weekday()]
+                if len(filtered_arr):
+                    print("day_of_the_week: ",filtered_arr[0].day_of_the_week)
+                    continue
             checkIn_Time = hikvisionGetcheckIn(employeeNo= employee['attendance_device_id'],device=shift["device"])
             manager = {}
             if(employee["reports_to"]): 

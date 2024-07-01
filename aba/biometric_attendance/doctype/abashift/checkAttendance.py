@@ -22,7 +22,7 @@ def exc_date(day):
 
 @frappe.whitelist()
 def update_absent_time_for_employees(device, start_date, end_date, start_time, time_to_wait, has_exceptional_day, e_day, e_start_time, e_time_to_wait, abashift_id):
-    device_doc = frappe.db.get_value('Device', device, ['ip_address', 'user_name', 'password'])
+    device_doc = frappe.db.get_value('Device', device, ['ip_address', 'user_name', 'password']) 
     
     # # Retrieve all employees
     employees = frappe.get_all('Employee', filters={'status': 'Active','shift_type':abashift_id}, fields=['name', 'attendance_device_id', 'shift_type',"employee_name","name","user_id","reports_to"])
@@ -175,7 +175,7 @@ def calculate_absent_time(device_doc, employee, start_date, end_date, start_time
                             # #change doc owner
                             # frappe.db.set_value("Lateness", data.name, "owner", managerUser["username"])
                             # print("doc data:", data.name)
-                            #assigne user
+                            #assign user
                             # args = {
                             #     "assign_to" : [],
                             #     "doctype" : "Lateness",

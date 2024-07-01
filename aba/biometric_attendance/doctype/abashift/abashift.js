@@ -34,5 +34,30 @@ frappe.ui.form.on("ABAshift", {
                 // frm.set_value('status',r['message'])
             }
         });
+	},
+	get_absenteeism: function(frm) {
+        console.log(frm.doc)
+        frappe.call({
+            method: "aba.biometric_attendance.doctype.absenteeism.checkAbsenteeism.update_absent_time_for_employees", 
+            args: {
+                device: frm.doc.device,
+                start_date: frm.doc.start_date,
+                end_date: frm.doc.end_date,
+                abashift_id: frm.docname
+            },
+            callback: function(r) {
+                if (r.message) {
+                    // Check if the message indicates progress
+                    if (r.message.progress !== undefined) {
+                        // Display progress in msgprint
+                        frappe.msgprint("Progress: " + r.message.progress + "%", "Processing...", "info");
+                    } else {
+                        // Display final message
+                        frappe.msgprint(r.message);
+                    }
+                }
+                // frm.set_value('status',r['message'])
+            }
+        });
 	}
 });

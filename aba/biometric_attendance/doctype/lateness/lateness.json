@@ -43,21 +43,9 @@
    "read_only": 1
   },
   {
-   "fieldname": "check_in_time",
-   "fieldtype": "Time",
-   "label": "Check In Time",
-   "read_only": 1
-  },
-  {
    "fieldname": "check_in_section",
    "fieldtype": "Section Break",
    "label": "Check In"
-  },
-  {
-   "fieldname": "late_time",
-   "fieldtype": "Float",
-   "label": "Late Time",
-   "read_only": 1
   },
   {
    "fieldname": "manager",
@@ -65,11 +53,21 @@
    "label": "Manager",
    "options": "User",
    "read_only": 1
+  },
+  {
+   "fieldname": "check_in_time",
+   "fieldtype": "Time",
+   "label": "Check In Time"
+  },
+  {
+   "fieldname": "late_time",
+   "fieldtype": "Float",
+   "label": "Late Time"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-05-31 16:01:36.949237",
+ "modified": "2024-06-18 09:01:06.594666",
  "modified_by": "Administrator",
  "module": "biometric attendance",
  "name": "Lateness",

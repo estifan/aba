@@ -24,7 +24,6 @@ class Lateness(Document):
 				# print("compare",self.check_in_time >= shift["start_time"])
 			else:
 				self.late_time = 0.00
-			# print("late agan",)
 		elif(self.workflow_state == "Waiting For Manager Approval"):
 			employee = frappe.get_all('Employee', filters={"name": self.employee_id }, fields=['shift_type',"user_id"])[0]
 			if frappe.get_user().doc.name != employee['user_id']:
@@ -45,4 +44,4 @@ class Lateness(Document):
 			print("shift: ",shift)
 			check_in_time =hikvisionGetcheckIn(employeeNo=employee['attendance_device_id'],day= self.date, device=shift["device"])
 			self.check_in_time = check_in_time
-			# to do
+			

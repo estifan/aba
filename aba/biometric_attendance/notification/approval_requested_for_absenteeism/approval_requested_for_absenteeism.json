@@ -1,0 +1,37 @@
+{
+ "attach_print": 0,
+ "channel": "Email",
+ "creation": "2024-06-25 08:54:19.020072",
+ "days_in_advance": 0,
+ "docstatus": 0,
+ "doctype": "Notification",
+ "document_type": "Absenteeism",
+ "enabled": 1,
+ "event": "Value Change",
+ "idx": 0,
+ "is_standard": 1,
+ "message": "<p>Approval requested for Absenteeism {{doc.name}}</p>\n",
+ "message_type": "Markdown",
+ "modified": "2024-06-25 08:56:14.124207",
+ "modified_by": "Administrator",
+ "module": "biometric attendance",
+ "name": "Approval requested for Absenteeism",
+ "owner": "Administrator",
+ "recipients": [
+  {
+   "condition": "doc.workflow_state == 'Waiting For Manager Approval'",
+   "receiver_by_document_field": "manager",
+   "receiver_by_role": ""
+  },
+  {
+   "condition": "doc.workflow_state == 'Waiting For HR Approval'",
+   "receiver_by_role": "HR Manager"
+  }
+ ],
+ "send_system_notification": 1,
+ "send_to_all_assignees": 0,
+ "sender": "",
+ "sender_email": "",
+ "subject": "Approval requested for Absenteeism {{doc.name}}",
+ "value_changed": "workflow_state"
+}

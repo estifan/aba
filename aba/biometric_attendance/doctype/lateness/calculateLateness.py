@@ -17,9 +17,12 @@ def exc_date(day):
 
 
 def calculateLateness(start_date = date.today(), end_date = date.today(),abashift_id = "null",chackIn=""):
-    shiftData  = frappe.db.get_values("ABAshift", {'name': abashift_id}, "*", as_dict=True)[0]
-    print(shiftData)
-
+    shiftData = frappe.get_doc('ABAshift', abashift_id).as_dict()
+    if len(shiftData.list_of_days):
+        day_of_the_week = shiftData.list_of_days[0].day_of_the_week
+        if start_date.weekday() == exc_date(day_of_the_week):
+             return 0
+        print("day_of_the_week: ",shiftData.list_of_days[0].day_of_the_week)
 
     count = timedelta(hours=0)
     delta = timedelta(days=1)

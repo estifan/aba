@@ -1,0 +1,78 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:{absent_date}-{employee_name}",
+ "creation": "2024-06-17 14:12:27.264179",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "employee",
+  "employee_name",
+  "manager",
+  "column_break_dinz",
+  "absent_date",
+  "deductible"
+ ],
+ "fields": [
+  {
+   "fieldname": "employee",
+   "fieldtype": "Link",
+   "label": "Employee",
+   "options": "Employee"
+  },
+  {
+   "fieldname": "employee_name",
+   "fieldtype": "Data",
+   "label": "Employee Name"
+  },
+  {
+   "fieldname": "manager",
+   "fieldtype": "Data",
+   "label": "Manager"
+  },
+  {
+   "fieldname": "column_break_dinz",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "absent_date",
+   "fieldtype": "Date",
+   "label": "Absent Date"
+  },
+  {
+   "default": "Yes",
+   "fieldname": "deductible",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Deductible ",
+   "options": "Yes\nNo",
+   "read_only": 1,
+   "reqd": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2024-06-28 08:35:02.211700",
+ "modified_by": "Administrator",
+ "module": "biometric attendance",
+ "name": "Absenteeism",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

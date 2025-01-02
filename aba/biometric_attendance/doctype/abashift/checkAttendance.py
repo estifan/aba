@@ -1,5 +1,6 @@
 from time import sleep
 from aba.biometric_attendance.device import hikvisionGetcheckIn
+from aba.biometric_attendance.doctype.util import has_fractional_seconds
 import frappe
 import requests
 from requests.auth import HTTPDigestAuth
@@ -97,8 +98,8 @@ def calculate_absent_time(device_doc, employee, start_date, end_date, start_time
         if data['totalMatches'] != 0:
             data = data["InfoList"][0]["time"]
             if data:
-                start_time1 = datetime.strptime(start_time, '%H:%M:%S')
-                time_to_wait1 = datetime.strptime(time_to_wait, '%H:%M:%S')
+                start_time1 = datetime.strptime(start_time, '%H:%M:%S.%f') if has_fractional_seconds(start_time) else datetime.strptime(start_time, '%H:%M:%S')
+                time_to_wait1 = datetime.strptime(time_to_wait, '%H:%M:%S.%f') if has_fractional_seconds(time_to_wait) else datetime.strptime(time_to_wait, '%H:%M:%S')
                 if has_exceptional_day:
                     if weekDay >= 7:
                         
@@ -111,8 +112,8 @@ def calculate_absent_time(device_doc, employee, start_date, end_date, start_time
                     print("start_date",start_date)
                     print("weekDay: ",weekDay)
                     if weekDay == exception_day:
-                        start_time1 = datetime.strptime(e_start_time, '%H:%M:%S')
-                        time_to_wait1 = datetime.strptime(e_time_to_wait, '%H:%M:%S')
+                        start_time1 = datetime.strptime(e_start_time, '%H:%M:%S.%f') if has_fractional_seconds(e_start_time) else datetime.strptime(e_start_time, '%H:%M:%S')
+                        time_to_wait1 = datetime.strptime(e_time_to_wait, '%H:%M:%S.%f') if has_fractional_seconds(e_time_to_wait) else datetime.strptime(e_time_to_wait, '%H:%M:%S')
                         # weekDay = weekDay - 7
                         # print("weekDay negative: ",weekDay)
                     

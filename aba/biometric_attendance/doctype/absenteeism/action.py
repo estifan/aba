@@ -1,4 +1,4 @@
-from aba.biometric_attendance.doctype.lateness.calculateLateness import calculateLateness, exc_date
+from aba.biometric_attendance.doctype.lateness.calculateLateness import calculateEarlyOut, exc_date
 import frappe
 import requests
 from requests.auth import HTTPDigestAuth
@@ -8,7 +8,7 @@ from datetime import datetime, date, time, timedelta
 from aba.biometric_attendance.device import hikvisionGetAbsenteeism
 from frappe.desk.form.assign_to import add
 
-def addDailyAbsenteeismToDoc():
+def addDailyAbsenteeismToDoc(): 
     employees = frappe.get_all('Employee', filters={'status': 'Active'}, fields=['name', "employee_name","user_id", 'attendance_device_id','shift_type','reports_to'])
     for employee in employees:
         print(employee['attendance_device_id'])
@@ -20,6 +20,12 @@ def addDailyAbsenteeismToDoc():
                 if len(filtered_arr):
                     print("day_of_the_week: ",filtered_arr[0].day_of_the_week)
                     continue
+            # check if employee is on leave
+            leave = frappe.get_all('Attendance', filters={"status":"On Leave",'attendance_date': date.today(),"employee": employee['name']}, fields=['name'])
+            print("leave", leave)
+            if len(leave):
+                continue
+            print("not on leave")
             Absenteeism = hikvisionGetAbsenteeism(employeeNo= employee['attendance_device_id'],device=shift["device"])
             manager = {}
             if(employee["reports_to"]): 

@@ -15,7 +15,7 @@ class Absenteeism(Document):
 			pass
 		elif(self.workflow_state == "Waiting For Manager Approval"):
 			employee = frappe.get_all('Employee', filters={"name": self.employee }, fields=['shift_type',"user_id"])[0]
-			if frappe.get_user().doc.name != employee['user_id']:
+			if frappe.get_user().doc.name != employee['user_id'] or frappe.get_user().doc.name == "Administrator":
 				self.workflow_state = "Pending"
 				frappe.msgprint("You can't request approval for other employee","Error")
 			# else:

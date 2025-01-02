@@ -153,13 +153,17 @@ app_include_js = "/assets/aba/reg.js"
 # }
 scheduler_events = {
     "cron":{
-        "00 10,22 * * *":[
+        "00 10 * * *":[
             "aba.biometric_attendance.action.addDailyLatenessToDoc"
-        ]
-    },
-    "cron":{
+        ],
+        "00 22 * * *":[
+            "aba.biometric_attendance.action.addDailyLatenessToDoc"
+        ],
         "00 22 * * *":[
             "aba.biometric_attendance.doctype.absenteeism.action.addDailyAbsenteeismToDoc"
+        ],
+        "00 22 * * *":[
+            "aba.biometric_attendance.doctype.early_out.action.addDailyEarlyOutToDoc"
         ]
     },
     # "daily": [

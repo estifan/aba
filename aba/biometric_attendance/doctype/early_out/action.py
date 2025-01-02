@@ -1,14 +1,14 @@
-from aba.biometric_attendance.doctype.lateness.calculateLateness import calculateLateness, exc_date
+from aba.biometric_attendance.doctype.lateness.calculateLateness import calculateEarlyOut, exc_date
 import frappe
 import requests
 from requests.auth import HTTPDigestAuth
 import json
 import frappe.share
 from datetime import datetime, date, time, timedelta
-from aba.biometric_attendance.device import hikvisionGetcheckIn
+from aba.biometric_attendance.device import hikvisionGetCheckOut
 from frappe.desk.form.assign_to import add
 
-def addDailyLatenessToDoc():
+def addDailyEarlyOutToDoc():
     print("daily")
     employees = frappe.get_all('Employee', filters={'status': 'Active'}, fields=['name', "employee_name","user_id", 'attendance_device_id','shift_type','reports_to'])
     for employee in employees:
@@ -24,25 +24,25 @@ def addDailyLatenessToDoc():
             half_day_leave = frappe.get_all('Attendance', filters={"status":"Half Day",'attendance_date': date.today(),"employee": employee['name']}, fields=['name'])
             if len(half_day_leave):
                 continue
-            checkIn_Time = hikvisionGetcheckIn(employeeNo= employee['attendance_device_id'],device=shift["device"])
+            checkOut_Time = hikvisionGetCheckOut(employeeNo= employee['attendance_device_id'],device=shift["device"])
             manager = {}
             if(employee["reports_to"]): 
                 manager = frappe.get_all('Employee', filters={'status': 'Active','name':  employee["reports_to"]}, fields=["user_id"])[0]
-            print(checkIn_Time)
+            print(checkOut_Time)
             try:
-                frappe.get_doc("DocType", "Lateness")
-                print("Doctype already exists:", "Lateness")
-                lateTime = calculateLateness(abashift_id=employee['shift_type'],chackIn=checkIn_Time)
-                if(lateTime):
+                frappe.get_doc("DocType", "Early out")
+                print("Doctype already exists:", "Early out")
+                EarlyTime = calculateEarlyOut(abashift_id=employee['shift_type'],chackOut=checkOut_Time)
+                if(EarlyTime):
                     try:
                         newLateness = frappe.get_doc(
                             {
-                                "doctype": "Lateness",
+                                "doctype": "Early out",
                                 "employee_id": employee["name"],
                                 "employee_name": employee["employee_name"],
                                 "date": date.today(),
-                                "check_in_time": checkIn_Time,
-                                "late_time": lateTime,
+                                "check_out_time": checkOut_Time,
+                                "early_time": EarlyTime,
                                 "manager": manager["user_id"],
                                 # "employee_email": employee["user_id"],
                                 # "manager_email": manager["user_id"],
@@ -55,12 +55,12 @@ def addDailyLatenessToDoc():
                         try:
                             newLateness = frappe.get_doc(
                             {
-                                "doctype": "Lateness",
+                                "doctype": "Early out",
                                 "employee_id": employee["name"],
                                 "employee_name": employee["employee_name"],
                                 "date": date.today(),
-                                "check_in_time": checkIn_Time,
-                                "late_time": lateTime,
+                                "check_out_time": checkOut_Time,
+                                "early_time": EarlyTime,
                                 # "manager": manager["user_id"],
                                 # "employee_email": employee["user_id"],
                                 # "manager_email": manager["user_id"],
@@ -71,26 +71,15 @@ def addDailyLatenessToDoc():
                             frappe.db.commit()
                         except:
                             pass
-                    # #change doc owner
-                    # frappe.db.set_value("Lateness", data.name, "owner", managerUser["username"])
-                    # print("doc data:", data.name)
-                    #assigne user
-                    # args = {
-                    #     "assign_to" : [],
-                    #     "doctype" : "Lateness",
-                    #     "name" : data.name,
-                    #     "description" : "auto assignment",
-                    # }
-                    # add(args, ignore_permissions=True)
                     try:
-                        frappe.share.add("Lateness",data.name,employee["user_id"],1,1,0,0,0,1)
+                        frappe.share.add("Early out",data.name,employee["user_id"],1,1,0,0,0,1)
                     except:
                         print("share error for employee")
                     try:
-                        frappe.share.add("Lateness",data.name,manager["user_id"],1,1,0,0,0,1)
+                        frappe.share.add("Early out",data.name,manager["user_id"],1,1,0,0,0,1)
                     except:
                         print("share error for manager")
                 
             except frappe.DoesNotExistError:
-                print("Doctype already exists false:", "Lateness")
+                print("Doctype already exists false:", "Early out")
             

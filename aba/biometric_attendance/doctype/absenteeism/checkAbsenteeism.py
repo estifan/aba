@@ -44,6 +44,10 @@ def update_absent_time_for_employees(device, start_date, end_date,abashift_id):
                     print("day_of_the_week: ",filtered_arr[0].day_of_the_week)
                     start_date_loop += delta
                     continue
+            leave = frappe.get_all('Attendance', filters={"status":"On Leave",'attendance_date': date.today(),"employee": employee['name']}, fields=['name'])
+            print("leave", leave)
+            if len(leave):
+                continue
             start_date_loop2 = datetime.strftime(start_date_loop,'%Y-%m-%d')
             Absenteeism = hikvisionGetAbsenteeism(employeeNo= employee['attendance_device_id'],device=device,day= start_date_loop2)
             manager = {}

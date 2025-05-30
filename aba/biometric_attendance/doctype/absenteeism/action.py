@@ -9,6 +9,14 @@ from aba.biometric_attendance.device import hikvisionGetAbsenteeism
 from frappe.desk.form.assign_to import add
 
 def addDailyAbsenteeismToDoc(): 
+    holidays_list = frappe.get_all('Holiday List', fields=['name'])
+    for holiday_list in holidays_list:
+        holiday_doc = frappe.get_doc("Holiday List", holiday_list['name'])
+        for holyday in holiday_doc.holidays:
+            if date.today() == holyday.holiday_date:
+                print("holiday")
+                return
+    print("not holiday")
     employees = frappe.get_all('Employee', filters={'status': 'Active'}, fields=['name', "employee_name","user_id", 'attendance_device_id','shift_type','reports_to'])
     for employee in employees:
         print(employee['attendance_device_id'])

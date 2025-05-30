@@ -22,6 +22,14 @@ def exc_date(day):
 
 @frappe.whitelist()
 def update_absent_time_for_employees(device, start_date, end_date,abashift_id):
+    holidays_list = frappe.get_all('Holiday List', fields=['name'])
+    for holiday_list in holidays_list:
+        holiday_doc = frappe.get_doc("Holiday List", holiday_list['name'])
+        for holyday in holiday_doc.holidays:
+            if date.today() == holyday.holiday_date:
+                print("holiday")
+                return
+    print("not holiday")
     
     # # Retrieve all employees
     employees = frappe.get_all('Employee', filters={'status': 'Active','shift_type':abashift_id}, fields=['name', 'attendance_device_id', 'shift_type',"employee_name","name","user_id","reports_to"])

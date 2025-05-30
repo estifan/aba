@@ -22,14 +22,6 @@ def exc_date(day):
 
 @frappe.whitelist()
 def update_absent_time_for_employees(device, start_date, end_date,abashift_id):
-    holidays_list = frappe.get_all('Holiday List', fields=['name'])
-    for holiday_list in holidays_list:
-        holiday_doc = frappe.get_doc("Holiday List", holiday_list['name'])
-        for holyday in holiday_doc.holidays:
-            if date.today() == holyday.holiday_date:
-                print("holiday")
-                return
-    print("not holiday")
     
     # # Retrieve all employees
     employees = frappe.get_all('Employee', filters={'status': 'Active','shift_type':abashift_id}, fields=['name', 'attendance_device_id', 'shift_type',"employee_name","name","user_id","reports_to"])
@@ -45,6 +37,16 @@ def update_absent_time_for_employees(device, start_date, end_date,abashift_id):
         employee_number=employee['attendance_device_id']
         print(employee_number)
         while start_date_loop <= end_date:
+            holidays_list = frappe.get_all('Holiday List', fields=['name'])
+            for holiday_list in holidays_list:
+                holiday_doc = frappe.get_doc("Holiday List", holiday_list['name'])
+                for holyday in holiday_doc.holidays:
+                    if start_date_loop == holyday.holiday_date:
+                        print("holiday")
+                        start_date_loop += delta
+                        continue
+            print("not holiday")
+    
             shift = frappe.get_doc('ABAshift', employee['shift_type']).as_dict()
             if len(shift.list_of_days):
                 filtered_arr = [d for d in shift.list_of_days if exc_date(d.day_of_the_week)-1 == start_date_loop.weekday()]

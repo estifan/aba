@@ -30,7 +30,8 @@ class Lateness(Document):
 				self.workflow_state = "Pending"
 				frappe.msgprint("You can't request approval for other employee","Error")
 			else:
-				self.check_in_time = "8:00:00"
+				shift = frappe.get_all('ABAshift', filters={'name': employee['shift_type']}, fields=['start_time'])[0]
+				self.check_in_time = shift["start_time"]
 		elif(self.workflow_state == "Waiting For HR Approval"):
 			employee = frappe.get_all('Employee', filters={"name": self.employee_id }, fields=['shift_type',"user_id"])[0]
 			print("Waiting For HR Approval",frappe.get_user().doc.name)
